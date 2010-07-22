@@ -1,15 +1,9 @@
   /*
    * jqDnR-touch - Minimalistic Drag'n'Resize for jQuery.
+   * Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.php
    *
-   * based on work Copyright (c) 2007 Brice Burgess <bhb@iceburg.net>, http://www.iceburg.net
+   * http://github.com/gaarf/jqDnR-touch
    *
-   * heavily modified by @gaarf for:
-   *    - touch support
-   *    - z-index upping
-   *    - legibility
-   *
-   * Licensed under the MIT License:
-   * http://www.opensource.org/licenses/mit-license.php
    */
 
 (function($){
