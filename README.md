@@ -12,7 +12,7 @@ Licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.
  * z-index upping
  * legibility
 
-#### usage:
+#### Usage:
 
 if box is a DOM node that should be draggable:
 
@@ -26,7 +26,7 @@ where moveHandle/resizeHandle are optional DOM elements. if not defined, the who
   
 #### jQuery synthesized events triggered:
 
- * `jqDnRstart`: drag/resize operation starts
- * `jqDnRend`: drag/resize operation ends
- * `jqDnRtop`: element brought to top (via click or touch) without drag
+ * `jqDnRstart`  drag/resize operation starts
+ * `jqDnRend`  drag/resize operation ends
+ * `jqDnRtop`  element brought to top (via click or touch) without drag
 
