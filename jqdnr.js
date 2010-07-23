@@ -11,7 +11,7 @@
   var DOWN = 'mousedown touchstart', 
       MOVE = 'mousemove touchmove', 
       STOP = 'mouseup touchend',
-      E, M = {}, Z = 1;
+      E, M = {};
 
   function xy(v) {
     var y = v.pageY, 
@@ -24,27 +24,35 @@
     return {x:x,y:y};
   }
 
-  function init(e,h,k){ 
-    return e.each( function(){
+  function toTop($e) {
+    var z = 1;
+    $e.siblings().each(function(){
+      z = Math.max(parseInt($(this).css("z-index"),10) || 1,z);
+    });
+    return $e.css('z-index', z+1);
+  }
+
+  function init(e,h,k) {
+    return e.each( function() {
       var $box = $(this),
           $handle = (h) ? $(h,this).css('cursor',k) : $box;
       $handle.bind(DOWN, {e:$box,k:k}, onGripStart);
       if(k=='move') {
-        $box.bind(DOWN,{},function(){$box.css('z-index', Z++);});
+        $box.bind(DOWN,{},function(){toTop($box).trigger('jqDnRtop')});
       }
     });
   };
 
   function onGripStart(v) {
     var p = xy(v), f = function(k) { return parseInt(E.css(k))||false; };
-    E = v.data.e.css('z-index', Z++);
+    E = toTop(v.data.e);
     M = {
       X:f('left')||0, Y:f('top')||0, 
       W:f('width')||E[0].scrollWidth||0, H:f('height')||E[0].scrollHeight||0,
       pX:p.x, pY:p.y, k:v.data.k, o:E.css('opacity')
     };
     E.css({opacity:0.7}).trigger('jqDnRstart');
-    $(document).bind(MOVE,onGripDrag).bind(STOP,onGripStop);
+    $(document).bind(MOVE,onGripDrag).bind(STOP,onGripEnd);
     return false;
   };
 
@@ -62,9 +70,9 @@
     return false;
   };
 
-  function onGripStop() {
-    $(document).unbind(MOVE,onGripDrag).unbind(STOP,onGripStop);
-    E.css({opacity:M.o}).trigger('jqDnRstop');
+  function onGripEnd() {
+    $(document).unbind(MOVE,onGripDrag).unbind(STOP,onGripEnd);
+    E.css({opacity:M.o}).trigger('jqDnRend');
   };
 
   $.fn.jqDrag = function(h) { return init(this, h, 'move'); };

@@ -12,4 +12,21 @@ Licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.
  * z-index upping
  * legibility
 
+#### usage:
+
+if box is a DOM node that should be draggable:
+
+    $(box).jqDrag();
+
+if box is a DOM node that should be both draggable and resizable:
+
+    $(box).jqDrag(moveHandle).jqResize(resizeHandle);
+
+where moveHandle/resizeHandle are optional DOM elements. if not defined, the whole box will be used as handle.
+  
+#### jQuery synthesized events triggered:
+
+ * `jqDnRstart`: drag/resize operation starts
+ * `jqDnRend`: drag/resize operation ends
+ * `jqDnRtop`: element brought to top (via click or touch) without drag
 
