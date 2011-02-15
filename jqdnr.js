@@ -59,7 +59,7 @@
   function onGripDrag(v) {
     var p = xy(v);
     if(M.k == 'move') { 
-      if(E.css('position')!='absolute') {
+      if(!E.css('position').match(/absolute|fixed/)) {
         E.css({position:'relative'});
       }
       E.css({ left:M.X+p.x-M.pX, top:M.Y+p.y-M.pY } );
